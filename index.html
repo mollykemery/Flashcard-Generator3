@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flashcard Generator</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    margin: 0;
+    padding: 30px;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(255,255,255,0.15);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.input-box {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+input {
+    font-size: 1.2rem;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 10px;
+    border: none;
+    width: 240px;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    background: #ffe066;
+    cursor: pointer;
+}
+
+#flashcards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    color: #333;
+    height: 160px;
+    border-radius: 18px;
+    font-size: 1.3rem;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,.3);
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 Flashcard Generator</h1>
+
+<div class="container">
+
+<div class="input-box">
+    <input id="term" placeholder="Term">
+    <input id="definition" placeholder="Definition">
+    <br>
+    <button onclick="addCard()">Add Flashcard</button>
+</div>
+
+<div id="flashcards"></div>
+
+</div>
+
+<script>
+const flashcards = document.getElementById("flashcards");
+
+function addCard() {
+    const term = document.getElementById("term").value.trim();
+    const definition = document.getElementById("definition").value.trim();
+
+    if (!term || !definition) return;
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = term;
+
+    let flipped = false;
+
+    card.onclick = () => {
+        flipped = !flipped;
+        card.textContent = flipped ? definition : term;
+    };
+
+    flashcards.appendChild(card);
+
+    document.getElementById("term").value = "";
+    document.getElementById("definition").value = "";
+}
+</script>
+
+</body>
+</html>
